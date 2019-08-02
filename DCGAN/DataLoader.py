@@ -1,5 +1,6 @@
 import numpy as np
 from keras.datasets import fashion_mnist
+import random
 
 class DataLoader:
     def __init__(self, noise_dim=100):
@@ -8,6 +9,7 @@ class DataLoader:
 
     def load_real(self):
         (train_x, _), (_, _) = fashion_mnist.load_data()
+        random.shuffle(train_x)
         self.dataset = np.expand_dims(train_x, axis=-1)
 
         self.dataset = self.dataset.astype('float32')
