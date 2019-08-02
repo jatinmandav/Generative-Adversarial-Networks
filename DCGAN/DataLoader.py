@@ -9,11 +9,11 @@ class DataLoader:
 
     def load_real(self):
         (train_x, _), (_, _) = fashion_mnist.load_data()
-        np.random.shuffle(train_x)
         self.dataset = np.expand_dims(train_x, axis=-1)
 
         self.dataset = self.dataset.astype('float32')
         self.dataset = (self.dataset - 127.5)/127.5
+        np.random.shuffle(self.dataset)
 
     def next_real_batch(self, no_sample):
         indexes = np.random.randint(0, self.dataset.shape[0], no_sample)
